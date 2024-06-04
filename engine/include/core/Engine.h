@@ -4,19 +4,19 @@
 #include "SceneManager.h"
 #include <memory>
 
-class Game {
+class Engine {
 public:
     // Delete the copy constructor and assignment operator to prevent copying
-    Game(const Game&) = delete;
-    Game& operator=(const Game&) = delete;
+    Engine(const Engine&) = delete;
+    Engine& operator=(const Engine&) = delete;
 
     // TODO: docs
-    static Game& GetInstance(); // provide a global access point to the instance
+    static Engine& GetInstance(); // provide a global access point to the instance
     void Run();
 
 private:
-    Game();
-    ~Game();
+    Engine();
+    ~Engine();
 
     void Init();
     void Update();

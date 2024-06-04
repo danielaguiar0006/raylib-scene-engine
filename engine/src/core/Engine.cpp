@@ -1,36 +1,37 @@
-#include "core/Game.h"
+#include "core/Engine.h"
+#include "core/GameCallbacks.h"
 // #include "scenes/Scene.h"
 // #include "graphics/Renderer.h"
 #include "raylib.h"
 
 // Singleton instance
-Game& Game::GetInstance()
+Engine& Engine::GetInstance()
 {
-    static Game instance;
+    static Engine instance;
     return instance;
 }
 
-Game::Game()
+Engine::Engine()
     : sceneManager(std::make_unique<SceneManager>())
     , renderer(std::make_unique<Renderer>())
 {
     Init();
 }
 
-Game::~Game()
+Engine::~Engine()
 {
     Cleanup();
 }
 
-void Game::Init()
+void Engine::Init()
 {
-    InitWindow(800, 450, "raylib test");
-    SetTargetFPS(144);
+    GameInit();
+
     // renderer->Init();
     // sceneManager->SetScene(Scene::Creat(Scene::SceneType::MainMenu));
 }
 
-void Game::Run()
+void Engine::Run()
 {
     while (!WindowShouldClose()) {
         Update();
@@ -38,30 +39,21 @@ void Game::Run()
     }
 }
 
-void Game::Update()
+void Engine::Update()
 {
+    GameUpdate();
+
     sceneManager->Update();
 }
 
-void Game::Render()
+void Engine::Render()
 {
-    Camera2D camera = { 0 };
-
-    BeginDrawing();
-
-    ClearBackground(RAYWHITE);
-    DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
-    BeginMode2D(camera);
-    EndMode2D();
-
-    // renderer->Render(sceneManager->GetCurrentScene());
-
-    EndDrawing();
+    GameRender();
 }
 
-void Game::Cleanup()
+void Engine::Cleanup()
 {
     sceneManager->Cleanup();
     renderer->Cleanup();
+    CloseWindow(); // Close window and OpenGL context
 }
