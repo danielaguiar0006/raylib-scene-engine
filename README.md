@@ -1,61 +1,63 @@
-# raylib-scene-engine
-Scene based game engine built on top of raylib. (C++)
+# Multiplayer Game Engine
 
-## Game Architecture Overview
-Core Components
+## Overview
+This project is a game engine built in C++ using the [raylib](https://www.raylib.com/) library. The engine is designed to support scene-based game development, similar to Godot, where scenes can be both regular game maps and prefabs containing entities. The `game/` directory is currently used as a test bench to validate and demonstrate the engine's capabilities.
 
-    Game: Manages the overall game state, including initialization, running the game loop, cleanup, and holding unique pointers to the Renderer and SceneManager.
-    SceneManager: Manages different scenes, handles transitions between scenes, and updates the current scene.
+## Features
+- **Scene-Based Architecture**: The engine allows for the creation of modular scenes that can include various entities. Scenes can act as prefabs, enabling reusable game components (enables scenes within scenes).
+- **Entity Management**: Easily manage and update game entities within scenes.
+- **UI Styling**: Includes multiple UI styles stored under `assets/ui-styles`.
 
-Graphics Component
+### Prerequisites
+- [CMake](https://cmake.org/)
+- [raylib](https://www.raylib.com/)
 
-    Renderer: Responsible for rendering the current scene.
+Ensure you have `CMake` and `raylib` installed.
+Alternatively, you can auto install `raylib` by uncommenting the following lines in the `engine/CMakeLists.txt` file:
+```cmake
+#[[ Uncomment this block to automatically download and build raylib if it is not found
 
-Entities Component
+# If raylib is not found, fetch and build it
+if (NOT raylib_FOUND)
+  include(FetchContent)
+  FetchContent_Declare(
+    raylib
+    DOWNLOAD_EXTRACT_TIMESTAMP OFF
+    URL https://github.com/raysan5/raylib/archive/refs/tags/${RAYLIB_VERSION}.tar.gz
+  )
+  FetchContent_GetProperties(raylib)
+  if (NOT raylib_POPULATED)
+    set(FETCHCONTENT_QUIET NO)
+    FetchContent_Populate(raylib)
+    set(BUILD_EXAMPLES OFF CACHE BOOL "" FORCE) # don't build the supplied examples
+    add_subdirectory(${raylib_SOURCE_DIR} ${raylib_BINARY_DIR})
+  endif()
+endif()
 
-    Entity: Base class for all game entities. Each entity has methods for initialization, updating, rendering, and cleanup.
-    Player: Inherits from Entity and includes player-specific properties and behaviors.
+]]#
+```
 
-Scenes Component
+### Build Instructions
 
-    Scene: Abstract base class for all scenes, supporting nested scenes and entities. Scenes handle their own initialization, updating, rendering, and cleanup.
-    MenuScene: A specific scene that represents the main menu of the game.
-    GameScene: A specific scene that represents the main gameplay area, including player interactions.
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/yourusername/multiplayer-game-engine.git
+    cd multiplayer-game-engine
+    ```
 
-How Everything Connects
+2. Create a build directory:
+    ```sh
+    mkdir build
+    cd build
+    ```
 
-    Game Initialization:
-        The Game class is a singleton and is responsible for initializing the game components. It creates unique pointers to the Renderer and SceneManager.
+3. Configure the project with CMake:
+    ```sh
+    cmake ..
+    ```
 
-    Renderer Initialization:
-        The Renderer class initializes the game window using raylib and is responsible for rendering the current scene.
-
-    Scene Management:
-        The SceneManager manages the active scene, including transitioning between scenes. It holds a unique pointer to the current scene and handles its lifecycle.
-
-    Scene Composition:
-        Each Scene can contain multiple Entity objects and other nested Scene objects. This allows for a flexible, hierarchical structure similar to Godot.
-
-    Game Loop:
-        The Game class runs the main game loop, which consists of updating and rendering the current scene. The SceneManager updates and renders the current scene via the Renderer.
-
-How Everything Works
-
-    Initialization:
-        Game::Init() initializes the Renderer and SceneManager. The initial scene (e.g., MenuScene) is set using SceneManager::SetScene().
-
-    Running the Game:
-        Game::Run() starts the main game loop, which continues until the window should close. In each iteration, Update() and Render() methods are called.
-
-    Updating:
-        Game::Update() calls SceneManager::Update(), which in turn calls Update() on the current scene. Each scene updates its entities and nested scenes.
-
-    Rendering:
-        Game::Render() retrieves the current scene from the SceneManager using SceneManager::GetCurrentScene() and passes it to Renderer::Render(), which then calls the Render() method on the scene to draw all its entities and nested scenes.
-
-    Scene Transitions:
-        The SceneManager handles transitions between scenes. When a scene transition is needed (e.g., switching from MenuScene to GameScene), SceneManager::SetScene() is called with a new scene. The current scene is cleaned up, and the new scene is initialized.
-
-    Entity and Scene Management:
-        Entities are added to scenes using Scene::AddEntity(), and nested scenes are added using Scene::AddSubScene(). Each scene manages its own entities and nested scenes, ensuring they are updated and rendered appropriately.
+4. Build the project:
+    ```sh
+    make
+    ```
 
