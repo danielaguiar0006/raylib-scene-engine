@@ -34,6 +34,7 @@
 # CMake
 build/
 out/
+compile_commands.json
 
 # Other
 .cache/
