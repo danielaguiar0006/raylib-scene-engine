@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# CMake
+build/
+out/
+
+# Other
+.cache/
+
+# Mac
+.DS_Store
