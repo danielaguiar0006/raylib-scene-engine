@@ -11,9 +11,9 @@ Engine& Engine::GetInstance()
 }
 
 Engine::Engine()
-    : windowManager(std::make_unique<WindowManager>())
-    , sceneManager(std::make_unique<SceneManager>())
-    , renderer(std::make_unique<Renderer>())
+    : m_WindowManager(std::make_unique<WindowManager>())
+    , m_SceneManager(std::make_unique<SceneManager>())
+    , m_Renderer(std::make_unique<Renderer>())
 {
     Init();
 }
@@ -25,10 +25,10 @@ Engine::~Engine()
 
 void Engine::Init()
 {
-    // --- Setup Raylib window ---
-    windowManager->Init(100, 100, "Test Game");
-    // --- END Setup Raylib window ---
+    // Setup Raylib window
+    m_WindowManager->Init(100, 100, "Test Game");
 
+    // Setup game
     GameInit();
 
     // renderer->Init();
@@ -47,7 +47,7 @@ void Engine::Update()
 {
     GameUpdate();
 
-    sceneManager->Update();
+    m_SceneManager->Update();
 }
 
 void Engine::Render()

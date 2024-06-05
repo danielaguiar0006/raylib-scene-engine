@@ -29,5 +29,5 @@ public:
     }
 
 private:
-    std::unique_ptr<Scene> currentScene;
+    std::unique_ptr<Scene> m_CurrentScene;
 };

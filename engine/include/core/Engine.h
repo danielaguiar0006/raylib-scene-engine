@@ -5,6 +5,7 @@
 #include "graphics/Renderer.h"
 #include <memory>
 
+// Singelton class
 class Engine {
 public:
     // Delete the copy constructor and assignment operator to prevent copying
@@ -24,7 +25,7 @@ private:
     void Render();
     void Cleanup();
 
-    std::unique_ptr<WindowManager> windowManager;
-    std::unique_ptr<SceneManager> sceneManager;
-    std::unique_ptr<Renderer> renderer;
+    std::unique_ptr<WindowManager> m_WindowManager;
+    std::unique_ptr<SceneManager> m_SceneManager;
+    std::unique_ptr<Renderer> m_Renderer;
 };

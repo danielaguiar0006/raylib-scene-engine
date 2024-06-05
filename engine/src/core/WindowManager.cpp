@@ -1,57 +1,78 @@
 #include "core/WindowManager.h"
 #include <raylib.h>
 
-WindowManager::WindowManager() : windowWidth(800), windowHeight(450), maxFPS(60), fullscreen(false)
+WindowManager::WindowManager()
+    : m_WindowWidth(800)
+    , m_WindowHeight(450)
+    , m_MaxFPS(60)
+    , m_Fullscreen(false)
 {
 }
 
 WindowManager::~WindowManager()
 {
-    Cleanup();
-    TraceLog(LOG_INFO, "WindowManager destroyed");
+    if (Cleanup()) {
+        TraceLog(LOG_INFO, "WindowManager succesfully destroyed");
+    } else {
+        TraceLog(LOG_ERROR, "WindowManager was not destroyed properly");
+    }
 }
 
-void WindowManager::Init(int windowWidth, int windowHeight, const char* windowTitle)
+void WindowManager::Init(int pixelWidth, int pixelHeight, const char* windowTitle)
 {
-    this->windowWidth = windowWidth;
-    this->windowHeight = windowHeight;
-    this->fullscreen = false;
-    InitWindow(windowWidth, windowHeight, windowTitle);
-    SetMaxFPS(maxFPS);
+    m_WindowWidth = pixelWidth;
+    m_WindowHeight = pixelHeight;
+    m_Fullscreen = false;
+    InitWindow(pixelWidth, pixelHeight, windowTitle);
+    SetMaxFPS(m_MaxFPS);
+
+    // HACK: Logging is done here because the window is created in this function, not in the constructor
+    if (IsWindowReady()) {
+        TraceLog(LOG_INFO, "WindowManager succesfully initialized");
+    } else {
+        TraceLog(LOG_ERROR, "WindowManager was not initialized properly");
+    }
 }
 
-void WindowManager::Cleanup()
+bool WindowManager::Cleanup()
 {
     CloseWindow();
+
+    // Check if the window was successfully closed
+    if (IsWindowReady()) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
-void WindowManager::SetResolution(int width, int height)
+void WindowManager::SetResolution(int pixelWidth, int pixelHeight)
 {
-    this->windowWidth = width;
-    this->windowHeight = height;
-    SetWindowSize(width, height);
+    m_WindowWidth = pixelWidth;
+    m_WindowHeight = pixelHeight;
+    SetWindowSize(pixelWidth, pixelHeight);
 }
 
 void WindowManager::SetMaxFPS(int fps)
 {
-    this->maxFPS = fps;
+    m_MaxFPS = fps;
     SetTargetFPS(fps);
 }
 
 // TODO: Maybe keep the get function in the .h file?
 int WindowManager::GetWidth() const
 {
-    return windowWidth;
+    return m_WindowWidth;
 }
 
 int WindowManager::GetHeight() const
 {
-    return windowHeight;
+    return m_WindowHeight;
 }
 
 int WindowManager::GetMaxFPS() const
 {
-    return maxFPS;
+    return m_MaxFPS;
 }
 
 bool WindowManager::IsFullscreen() const
