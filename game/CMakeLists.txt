@@ -7,7 +7,7 @@ include_directories(${CMAKE_SOURCE_DIR}/engine/include)
 
 # Recursively get all the source files
 file(GLOB_RECURSE GAME_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 
 # Create the executable for the game

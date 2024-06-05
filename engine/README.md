@@ -5,11 +5,22 @@ Scene based game engine built on top of raylib. (C++)
 Core Components
 
     Engine: Manages the overall game state, including initialization, running the game loop, cleanup, and holding unique pointers to the Renderer and SceneManager.
+    Engine (Engine.cpp)
+
+    Window Management: Initialize, resize, and close the window.
+    Game Loop Control: Manage the main game loop, including updating game state and invoking rendering operations.
+    Input Handling: Capture and process user input events.
+
     SceneManager: Manages different scenes, handles transitions between scenes, and updates the current scene.
 
 Graphics Component
 
     Renderer: Responsible for rendering the current scene.
+    Renderer (Render.cpp)
+
+    Rendering Operations: Render entities and scenes.
+    Graphics Resource Management: Load and manage textures, shaders, and other graphics resources.
+    Camera Control: Handle camera transformations and viewports.
 
 Entities Component
 

@@ -1,4 +1,4 @@
-# Multiplayer Game Engine
+# Raylib Scene Engine
 
 ## Overview
 This project is a game engine built in C++ using the [raylib](https://www.raylib.com/) library. The engine is designed to support scene-based game development, similar to Godot, where scenes can be both regular game maps and prefabs containing entities. The `game/` directory is currently used as a test bench to validate and demonstrate the engine's capabilities.

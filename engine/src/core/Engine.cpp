@@ -1,8 +1,7 @@
 #include "core/Engine.h"
 #include "core/GameCallbacks.h"
+#include <raylib.h>
 // #include "scenes/Scene.h"
-// #include "graphics/Renderer.h"
-#include "raylib.h"
 
 // Singleton instance
 Engine& Engine::GetInstance()
@@ -12,7 +11,8 @@ Engine& Engine::GetInstance()
 }
 
 Engine::Engine()
-    : sceneManager(std::make_unique<SceneManager>())
+    : windowManager(std::make_unique<WindowManager>())
+    , sceneManager(std::make_unique<SceneManager>())
     , renderer(std::make_unique<Renderer>())
 {
     Init();
@@ -25,6 +25,10 @@ Engine::~Engine()
 
 void Engine::Init()
 {
+    // --- Setup Raylib window ---
+    windowManager->Init(100, 100, "Test Game");
+    // --- END Setup Raylib window ---
+
     GameInit();
 
     // renderer->Init();
@@ -53,7 +57,8 @@ void Engine::Render()
 
 void Engine::Cleanup()
 {
-    sceneManager->Cleanup();
-    renderer->Cleanup();
-    CloseWindow(); // Close window and OpenGL context
+    // These are already cleaned up in their respective destructors because they are smart pointers
+    // sceneManager->Cleanup();
+    // renderer->Cleanup();
+    // windowManager->Cleanup();
 }

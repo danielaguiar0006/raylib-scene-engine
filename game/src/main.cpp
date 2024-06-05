@@ -4,17 +4,11 @@
 // #define RAYGUI_IMPLEMENTATION
 #include "core/GameCallbacks.h"
 #include "raygui.h"
-//
+
 void GameInit()
 {
     // Initialization
     //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
-
-    InitWindow(screenWidth, screenHeight, "Test Game");
-
-    SetTargetFPS(144); // Set our game to run at 60 frames-per-second
     //--------------------------------------------------------------------------------------
 }
 
@@ -49,6 +43,12 @@ void GameCleanup()
 int main()
 {
     Engine& engine = Engine::GetInstance();
+
+    // Needs to be done before the engine is initialized for now
+    // engine.SetWindowTitle("Test Game"); 
+    // engine.SetWindowWidth(100);
+    // engine.SetWindowHeight(100);
+
     engine.Run();
     return 0;
 }

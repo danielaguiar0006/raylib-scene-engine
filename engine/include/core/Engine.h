@@ -1,7 +1,8 @@
 #pragma once
 
-#include "graphics/Renderer.h"
 #include "SceneManager.h"
+#include "WindowManager.h"
+#include "graphics/Renderer.h"
 #include <memory>
 
 class Engine {
@@ -23,6 +24,7 @@ private:
     void Render();
     void Cleanup();
 
+    std::unique_ptr<WindowManager> windowManager;
     std::unique_ptr<SceneManager> sceneManager;
     std::unique_ptr<Renderer> renderer;
 };

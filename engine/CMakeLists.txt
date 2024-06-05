@@ -6,7 +6,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Recursively get all the source files
 file(GLOB_RECURSE ENGINE_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp
+    "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 
 # Add raylib dependency
