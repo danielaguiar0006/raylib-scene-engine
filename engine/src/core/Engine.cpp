@@ -26,10 +26,8 @@ Engine::~Engine()
 void Engine::Init()
 {
     // Setup Raylib window
-    m_WindowManager->Init(100, 100, "Test Game");
+    m_WindowManager->Init(1280, 720, "Test Game");
 
-    // Setup game
-    GameInit();
 
     // renderer->Init();
     // sceneManager->SetScene(Scene::Creat(Scene::SceneType::MainMenu));
@@ -37,6 +35,9 @@ void Engine::Init()
 
 void Engine::Run()
 {
+    // Setup game - Called here to avoid recursive calls to Engine::GetInstance()
+    GameInit();
+
     while (!WindowShouldClose()) {
         Update();
         Render();

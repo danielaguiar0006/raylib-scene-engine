@@ -14,6 +14,11 @@ public:
 
     // TODO: docs
     static Engine& GetInstance(); // provide a global access point to the instance
+
+    WindowManager& GetWindowManager() { return *m_WindowManager; }
+    SceneManager& GetSceneManager() { return *m_SceneManager; }
+    Renderer& GetRenderer() { return *m_Renderer; }
+
     void Run();
 
 private:
