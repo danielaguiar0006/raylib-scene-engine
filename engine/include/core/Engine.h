@@ -2,7 +2,6 @@
 
 #include "SceneManager.h"
 #include "WindowManager.h"
-#include "graphics/Renderer.h"
 #include <memory>
 
 // Singelton class
@@ -17,7 +16,6 @@ public:
 
     WindowManager& GetWindowManager() { return *m_WindowManager; }
     SceneManager& GetSceneManager() { return *m_SceneManager; }
-    Renderer& GetRenderer() { return *m_Renderer; }
 
     void Run();
 
@@ -32,5 +30,4 @@ private:
 
     std::unique_ptr<WindowManager> m_WindowManager;
     std::unique_ptr<SceneManager> m_SceneManager;
-    std::unique_ptr<Renderer> m_Renderer;
 };

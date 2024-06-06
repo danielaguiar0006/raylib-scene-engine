@@ -37,7 +37,7 @@ public:
 
     void Cleanup()
     {
-        // Don't cleanup the current scene, because it will be deleted by the unique_ptr
+        // Don't cleanup the current scene, because it will be deleted automatically by the unique_ptr
         // if (m_CurrentScene != nullptr) {
         //     m_CurrentScene->Cleanup();
         // }

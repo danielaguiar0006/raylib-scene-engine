@@ -13,9 +13,7 @@ Engine& Engine::GetInstance()
 Engine::Engine()
     : m_WindowManager(std::make_unique<WindowManager>())
     , m_SceneManager(std::make_unique<SceneManager>())
-    , m_Renderer(std::make_unique<Renderer>())
 {
-    Init();
 }
 
 Engine::~Engine()
@@ -25,21 +23,18 @@ Engine::~Engine()
 
 void Engine::Init()
 {
-    // Setup Raylib window
+    // Setup Raylib window - ! IMPORTANT: This must be called before any other raylib functions
     m_WindowManager->Init(1280, 720, "Test Game");
 
-
-    // renderer->Init();
+    GameInit();
+    m_SceneManager->Init();
     // sceneManager->SetScene(Scene::Creat(Scene::SceneType::MainMenu));
 }
 
 void Engine::Run()
 {
-    // TODO: Maybe move Engine.Init() here???
-
-    // Setup game - Called here to avoid recursive calls to Engine::GetInstance()
-    GameInit();
-    m_SceneManager->Init();
+    // Init called here to avoid Engine::GetInstance() constructor problems
+    Init();
 
     while (!WindowShouldClose()) {
         Update();
@@ -57,14 +52,12 @@ void Engine::Update()
 void Engine::Render()
 {
     GameRender();
-    //m_Renderer->Render();  TODO: figure out if I even want a "renderer" class instead of having the scene render itself
     m_SceneManager->Render();
 }
 
 void Engine::Cleanup()
 {
     // These are already cleaned up in their respective destructors because they are smart pointers
-    // sceneManager->Cleanup();
-    // renderer->Cleanup();
-    // windowManager->Cleanup();
+    // m_SceneManager->Cleanup();
+    // m_Renderer->Cleanup();
 }

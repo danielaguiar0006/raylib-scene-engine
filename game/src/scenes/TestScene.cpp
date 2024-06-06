@@ -8,6 +8,7 @@ TestScene::TestScene()
 TestScene::~TestScene()
 {
     Cleanup();
+    TraceLog(LOG_INFO, "TestScene succesfully destroyed");
 }
 
 void TestScene::Init()
