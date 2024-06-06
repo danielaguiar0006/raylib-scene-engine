@@ -6,26 +6,41 @@
 class SceneManager {
 public:
     SceneManager() { }
-    ~SceneManager() { }
+    ~SceneManager() { 
+        Cleanup();
+    }
 
     void SetScene(std::unique_ptr<Scene> scene)
     {
-        // currentScene = std::move(scene);
+        m_CurrentScene = std::move(scene);
     }
 
-    Scene* GetCurrentScene()
+    Scene* GetCurrentScene() const
     {
-        // return currentScene.get();
+        return m_CurrentScene.get();
     }
 
-    void Update()
+    void Init()
     {
-        // Update the current scene
+        m_CurrentScene->Init();
+    }
+
+    void Update(float deltaTime)
+    {
+        m_CurrentScene->Update(deltaTime);
+    }
+
+    void Render()
+    {
+        m_CurrentScene->Render();
     }
 
     void Cleanup()
     {
-        // Cleanup the current scene
+        // Don't cleanup the current scene, because it will be deleted by the unique_ptr
+        // if (m_CurrentScene != nullptr) {
+        //     m_CurrentScene->Cleanup();
+        // }
     }
 
 private:

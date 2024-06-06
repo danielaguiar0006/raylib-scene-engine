@@ -1,28 +1,27 @@
 #include "core/Engine.h"
-#define RAYGUI_IMPLEMENTATION
+#include <memory>
+// #define RAYGUI_IMPLEMENTATION
 #include "core/GameCallbacks.h"
-#include "raygui.h"
+// #include "raygui.h"
+#include "scenes/TestScene.h"
 #include <raylib.h>
 
 void GameInit()
 {
-    WindowManager& windowManager = Engine::GetInstance().GetWindowManager();
+    Engine& engine = Engine::GetInstance();
+    WindowManager& windowManager = engine.GetWindowManager();
+    SceneManager& sceneManager = engine.GetSceneManager();
+
     windowManager.SetMaxFPS(144);
+    sceneManager.SetScene(std::make_unique<TestScene>());
 }
 
-void GameUpdate()
+void GameUpdate(float deltaTime)
 {
 }
 
 void GameRender()
 {
-    BeginDrawing();
-
-    ClearBackground(RAYWHITE);
-
-    DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
-    EndDrawing();
 }
 
 void GameCleanup()
@@ -33,5 +32,6 @@ int main()
 {
     Engine& engine = Engine::GetInstance();
     engine.Run();
+
     return 0;
 }

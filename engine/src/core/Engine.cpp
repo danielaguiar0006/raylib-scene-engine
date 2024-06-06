@@ -35,8 +35,11 @@ void Engine::Init()
 
 void Engine::Run()
 {
+    // TODO: Maybe move Engine.Init() here???
+
     // Setup game - Called here to avoid recursive calls to Engine::GetInstance()
     GameInit();
+    m_SceneManager->Init();
 
     while (!WindowShouldClose()) {
         Update();
@@ -46,14 +49,16 @@ void Engine::Run()
 
 void Engine::Update()
 {
-    GameUpdate();
-
-    m_SceneManager->Update();
+    float deltaTime = GetFrameTime();
+    GameUpdate(deltaTime);
+    m_SceneManager->Update(deltaTime);
 }
 
 void Engine::Render()
 {
     GameRender();
+    //m_Renderer->Render();  TODO: figure out if I even want a "renderer" class instead of having the scene render itself
+    m_SceneManager->Render();
 }
 
 void Engine::Cleanup()

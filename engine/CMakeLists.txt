@@ -3,6 +3,7 @@ project(GameEngine)
 
 # Include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_SOURCE_DIR}/game/include)  # Include the game's include directory
 
 # Recursively get all the source files
 file(GLOB_RECURSE ENGINE_SOURCES
