@@ -41,8 +41,8 @@ endif()
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/multiplayer-game-engine.git
-    cd multiplayer-game-engine
+    https://github.com/danielaguiar0006/raylib-scene-engine.git
+    cd raylib-scene-engine
     ```
 
 2. Create a build directory:
