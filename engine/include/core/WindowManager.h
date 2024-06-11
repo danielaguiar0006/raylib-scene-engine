@@ -1,30 +1,33 @@
 #pragma once
 
 class WindowManager {
-public:
+  public:
     /**
      * @brief Sets default values for private memeber variables.
      */
     WindowManager();
 
     /**
-     * @brief If Cleanup() returns true, it logs a success message if not, it logs an error message.
+     * @brief If Cleanup() returns true, it logs a success message if not, it
+     * logs an error message.
      */
     ~WindowManager();
 
     /**
-     * @brief Initializes the WindowManager with the given parameters and logs its success or failure.
+     * @brief Initializes the WindowManager with the given parameters and logs
+     * its success or failure.
      *
      * @param windowWidth The width of the window to be created.
      * @param windowHeight The height of the window to be created.
      * @param windowTitle The title of the window to be created.
      */
-    void Init(int windowWidth, int windowHeight, const char* windowTitle);
+    void Init(int windowWidth, int windowHeight, const char *windowTitle);
 
     /**
      * @brief Cleans up the WindowManager by closing the window.
      *
-     * @return true if the window was successfully closed, false otherwise (to be used for logging).
+     * @return true if the window was successfully closed, false otherwise (to
+     * be used for logging).
      */
     bool Cleanup();
 
@@ -49,7 +52,7 @@ public:
     int GetMaxFPS() const;
     bool IsFullscreen() const;
 
-private:
+  private:
     int m_WindowWidth;
     int m_WindowHeight;
     int m_MaxFPS;

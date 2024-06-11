@@ -6,20 +6,21 @@
 
 // Singelton class
 class Engine {
-public:
+  public:
     // Delete the copy constructor and assignment operator to prevent copying
-    Engine(const Engine&) = delete;
-    Engine& operator=(const Engine&) = delete;
+    Engine(const Engine &) = delete;
+    Engine &operator=(const Engine &) = delete;
 
     // TODO: docs
-    static Engine& GetInstance(); // provide a global access point to the instance
+    static Engine &
+    GetInstance(); // provide a global access point to the instance
 
-    WindowManager& GetWindowManager() { return *m_WindowManager; }
-    SceneManager& GetSceneManager() { return *m_SceneManager; }
+    WindowManager &GetWindowManager() { return *m_WindowManager; }
+    SceneManager &GetSceneManager() { return *m_SceneManager; }
 
     void Run();
 
-private:
+  private:
     Engine();
     ~Engine();
 

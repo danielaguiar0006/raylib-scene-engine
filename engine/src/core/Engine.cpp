@@ -4,26 +4,20 @@
 // #include "scenes/Scene.h"
 
 // Singleton instance
-Engine& Engine::GetInstance()
-{
+Engine &Engine::GetInstance() {
     static Engine instance;
     return instance;
 }
 
 Engine::Engine()
-    : m_WindowManager(std::make_unique<WindowManager>())
-    , m_SceneManager(std::make_unique<SceneManager>())
-{
-}
+    : m_WindowManager(std::make_unique<WindowManager>()),
+      m_SceneManager(std::make_unique<SceneManager>()) {}
 
-Engine::~Engine()
-{
-    Cleanup();
-}
+Engine::~Engine() { Cleanup(); }
 
-void Engine::Init()
-{
-    // Setup Raylib window - ! IMPORTANT: This must be called before any other raylib functions
+void Engine::Init() {
+    // Setup Raylib window - ! IMPORTANT: This must be called before any other
+    // raylib functions
     m_WindowManager->Init(1280, 720, "Test Game");
 
     GameInit();
@@ -31,8 +25,7 @@ void Engine::Init()
     // sceneManager->SetScene(Scene::Creat(Scene::SceneType::MainMenu));
 }
 
-void Engine::Run()
-{
+void Engine::Run() {
     // Init called here to avoid Engine::GetInstance() constructor problems
     Init();
 
@@ -42,22 +35,18 @@ void Engine::Run()
     }
 }
 
-void Engine::Update()
-{
+void Engine::Update() {
     float deltaTime = GetFrameTime();
     GameUpdate(deltaTime);
     m_SceneManager->Update(deltaTime);
 }
 
-void Engine::Render()
-{
+void Engine::Render() {
     GameRender();
     m_SceneManager->Render();
 }
 
-void Engine::Cleanup()
-{
-    // These are already cleaned up in their respective destructors because they are smart pointers
-    // m_SceneManager->Cleanup();
-    // m_Renderer->Cleanup();
+void Engine::Cleanup() {
+    // These are already cleaned up in their respective destructors because they
+    // are smart pointers m_SceneManager->Cleanup(); m_Renderer->Cleanup();
 }

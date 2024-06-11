@@ -5,16 +5,16 @@
 #include "entt.hpp"
 
 class Entity {
-public:
+  public:
     Entity();
 
     int GetId() const;
     Vector3 GetPosition() const;
 
-protected:
+  protected:
     Vector3 m_Position;
 
-private:
+  private:
     int m_Id;
     static int s_NextId;
 };

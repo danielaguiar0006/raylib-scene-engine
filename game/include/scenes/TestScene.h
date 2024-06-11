@@ -3,8 +3,8 @@
 #include "scenes/Scene.h"
 
 class TestScene : public Scene {
-public:
-    //TestScene() = default;
+  public:
+    // TestScene() = default;
     TestScene();
     ~TestScene() override;
 
@@ -13,7 +13,7 @@ public:
     void Render() override;
     void Cleanup() override;
 
-private:
-    Vector3 m_CubePosition = { 0.0f, 0.0f, 0.0f };
-    Vector2 m_CubeScreenPosition = { 0.0f, 0.0f };
+  private:
+    Vector3 m_CubePosition = {0.0f, 0.0f, 0.0f};
+    Vector2 m_CubeScreenPosition = {0.0f, 0.0f};
 };
