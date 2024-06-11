@@ -4,6 +4,10 @@
 This project is a game engine built in C++ using the [raylib](https://www.raylib.com/) library. The engine is designed to support scene-based game development, similar to Godot, where scenes can be both regular game maps and prefabs containing entities. The `game/` directory is currently used as a test bench to validate and demonstrate the engine's capabilities.
 
 ## Features
+packaged with:
+- [raygui]
+- [entt]
+
 - **Scene-Based Architecture**: The engine allows for the creation of modular scenes that can include various entities. Scenes can act as prefabs, enabling reusable game components (enables scenes within scenes).
 - **Entity Management**: Easily manage and update game entities within scenes.
 - **UI Styling**: Includes multiple UI styles stored under `assets/ui-styles`.

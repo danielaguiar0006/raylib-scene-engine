@@ -2,6 +2,8 @@
 
 #include <raylib.h>
 
+#include "entt.hpp"
+
 class Entity {
 public:
     Entity();

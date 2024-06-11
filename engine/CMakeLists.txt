@@ -3,6 +3,7 @@ project(GameEngine)
 
 # Include directories
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/lib)
 include_directories(${CMAKE_SOURCE_DIR}/game/include)  # Include the game's include directory
 
 # Recursively get all the source files
@@ -13,6 +14,8 @@ file(GLOB_RECURSE ENGINE_SOURCES
 # Add raylib dependency
 set(RAYLIB_VERSION 5.0)
 find_package(raylib ${RAYLIB_VERSION} QUIET) # QUIET or REQUIRED
+
+# Add entt dependency
 
 #[[ Uncomment this block to automatically download and build raylib if it is not found
 
@@ -37,13 +40,17 @@ endif()
 
 # Add raygui as an interface library
 add_library(raygui INTERFACE)
-target_include_directories(raygui INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include/ui)
+target_include_directories(raygui INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+
+# Add entt as an interface library
+add_library(entt INTERFACE)
+target_include_directories(entt INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 
 # Create the engine library
 add_library(GameEngine STATIC ${ENGINE_SOURCES})
 
 # Link raylib to the engine
-target_link_libraries(GameEngine raylib raygui m)
+target_link_libraries(GameEngine raylib raygui entt m)
 
 # Checks if OSX and links appropriate frameworks (Only required on MacOS)
 if (APPLE)
